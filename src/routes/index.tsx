@@ -1,24 +1,55 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Hero } from "@/components/landing/Hero";
+import { Blueprint, Measures, Problem, Steps, ValueProp } from "@/components/landing/Body";
+import { About, Faq, FinalCta, Guarantee, Offer } from "@/components/landing/Close";
+
+const title = "Cut 10+ Wasted Hours From Your Work Week";
+const description =
+  "Take the free 3-minute workflow scorecard: find out where your setup leaks time and get the first three fixes, tailored to the tools you already use.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Workflow audit and productivity system buildout",
+          description,
+          areaServed: "Worldwide",
+        }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main>
+      <Hero />
+      <ValueProp />
+      <Problem />
+      <Measures />
+      <Blueprint />
+      <Steps />
+      <Offer />
+      <About />
+      <Guarantee />
+      <Faq />
+      <FinalCta />
+    </main>
   );
 }
