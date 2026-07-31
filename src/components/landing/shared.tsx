@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export const SCORECARD_URL = "#scorecard";
+export const SCORECARD_URL = "/scorecard";
 
 export function Cta({
   label = "Start the free scorecard",
